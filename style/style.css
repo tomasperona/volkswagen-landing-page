@@ -1,0 +1,332 @@
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-size: 3.5em;
+}
+
+h2 {
+    font-size: 2.7em;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.25em;
+}
+
+ul {
+    list-style: none;
+
+}
+
+li {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+button{
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px 30px ;
+    border-radius: 15px;
+    border: 2px solid black;
+    box-shadow: 2px 2px 10px black;
+    color: white;
+    background-color: rgb(71, 71, 236);
+}
+
+
+body {
+    margin: 0;
+}
+
+button:hover {
+    background-color: #3333cc;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+
+}
+
+header {
+    background-color: whitesmoke;
+}
+
+header .logo{
+    margin-top: 0;
+    padding: 25px 30px;
+    font-weight: bolder;
+    color: #3333cc;
+    font-size: 2em;
+}
+
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+header nav {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+header a {
+    padding: 5px 12px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+header a:hover {
+    color: #3333cc;
+}
+
+.color_acento {
+    color: #3333cc;
+}
+
+#hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 90vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(/media/hero.jpeg);
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    background-repeat: no-repeat;
+}
+
+#hero h1 {
+    color: white;
+    font-size: 4em;
+}
+
+#hero button {
+    font-size: 1.75em;
+}
+
+#somos_volkswagen .container {
+    text-align: center;
+    padding: 200px 12px;
+}
+
+#nuestras_ofertas {
+    background-color: rgb(30,30, 30);
+    color: white;
+    text-align: center;
+}
+
+#nuestras_ofertas .container {
+    padding: 100px 0px;
+}
+
+
+#nuestras_ofertas p {
+    display: none;
+}
+
+#nuestras_ofertas h2 {
+    margin-top: 0;
+    font-size: 3.2em;
+}
+
+.carta:first-child {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/media/NAZ_4ba3f04f60c14871abfcbc6e5d6049a1.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.carta:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://www.carsmagazine.com.ar/wp-content/uploads/2010/03/vw-scirocco-r.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.carta:nth-child(3) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://cdn.uc.assets.prezly.com/1a2e3bcd-d0a6-46ef-a458-c946a700db01/DB2017AU00836_large.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#nuestras_ofertas .carta {
+    padding: 100px;
+    margin: 20px;
+    border-radius: 15px;
+}
+
+#caracteristicas .container {
+    text-align: center;
+    padding: 200px 12px;
+}
+
+#caracteristicas li  {
+    margin: 16px 0px;
+    font-weight: bold;
+}
+
+#compra_tu_auto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(30,30, 30);
+    height: 80vh;
+    color: white;
+}
+
+#compra_tu_auto button {
+    font-size: 5vw;
+}
+
+#compra_tu_auto h2 {
+    font-size: 9vw;
+}
+
+footer{
+    background-color: rgb(230, 230, 230);
+}
+
+footer .container {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+footer p {
+    margin: 0;
+    color: rgb(100, 100, 100);
+    padding: 12px;
+}
+
+@media (min-width: 720px) { 
+header{
+    position: fixed;
+    width: 100%;
+    }
+
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header nav {
+        flex-direction: row;
+        align-items: center;
+        padding-right: 20px;
+    }
+
+    #hero h1 {
+        font-size: 5em;
+    }
+
+    #somos_volkswagen .container {
+        display: flex;
+        justify-content: space-evenly;
+
+    }
+
+    #somos_volkswagen .image_container {
+        background-image:
+        url("https://resizer.glanacion.com/resizer/v2/murio-carl-hahn-el-hombre-que-inmortalizo-el-7WY7YQQ5JFBVHMVUIEBOZ5BK5E.jpg?auth=c2916e821f03e7465fababe18735969e2e02211c388c0c6317f79754be461c26&width=1200&quality=70&smart=false&height=777");
+        background-size: cover;
+        background-position: center center;
+        height: 500px;
+        width: 3000px;
+    }
+    #somos_volkswagen .texto {
+        width: 50%;
+        text-align: initial;
+        padding: 0px 30px ;
+        max-width: 600px;
+        line-height: 2em;
+        margin-left: 50px;
+        align-items: center;
+    }
+
+    #somos_volkswagen h2 {
+        margin-top: 0;
+    }
+
+    #nuestras_ofertas .ofertas {
+        display: flex;
+        justify-content: center;
+    }
+
+    #nuestras_ofertas p {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    #nuestras_ofertas .carta {
+        padding: 50px;
+        height: 60vh;
+        box-shadow: 5px 5px 10px black;
+    }
+
+    #nuestras_ofertas h3 {
+        margin-top: 0;
+    }
+
+    #nuestras_ofertas h2 {
+        font-size: 4em;
+    }
+
+    #caracteristicas .container {
+        text-align: initial;
+
+    }
+
+    #caracteristicas { 
+        background-image: 
+        url("https://cdn.autobild.es/sites/navi.axelspringer.es/public/media/image/2017/03/612765-nuevo-vw-golf-sorprende-fuera-dentro.jpg?tf=3840x");
+        background-repeat: no-repeat;
+        background-size: 600px 400px ;
+        background-position: calc(100vw - 700px) 100px;
+
+    }
+
+    #caracteristicas ul {
+        margin-left: 100px;
+
+    }
+
+    #compra_tu_auto h2 {
+        font-size: 5em;
+
+    }
+
+    #compra_tu_auto button {
+        font-size: 2em;
+    }
+
+    footer .container{
+        justify-content: flex-end;
+    }
+}

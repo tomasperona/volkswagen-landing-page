@@ -108,7 +108,7 @@ header a:hover {
     flex-direction: column;
     height: 90vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(/media/hero.jpeg);
+    url(/assets/media/hero.jpeg);
     background-size: cover;
     background-position: center center;
     color: white;
@@ -151,7 +151,7 @@ header a:hover {
 
 .carta:first-child {
     background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/media/NAZ_4ba3f04f60c14871abfcbc6e5d6049a1.jpg");
+    url(../media/NAZ_4ba3f04f60c14871abfcbc6e5d6049a1.jpg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

@@ -5,8 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volkswagen - Store</title>
     <link rel="stylesheet" href="../style/style.css">
+    <style>
+        header {
+            min-height: 80px;
+            box-shadow: 0 2px 8px rgba(51,51,204,0.07);
+        }
+        .container-cart-products {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #fff;
+            width: 400px;
+            z-index: 10;
+            box-shadow: 0 4px 16px rgba(51,51,204,0.10);
+            border-radius: 18px;
+            padding: 24px;
+            display: none; /* o usa .hidden-cart para ocultar */
+        }
+        .container-cart-products.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header con carrito idéntico para index.html y store.html -->
     <header>
         <div class="container">
             <p class="logo">Volkswagen</p>
@@ -16,9 +38,60 @@
                 <a href="../../index.html#caracteristicas">Caracteristicas</a>
                 <a href="./store.html">Tienda</a>
             </nav>
+            <div class="container_icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-cart">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
+                <span class="count_products">0</span>
+                <div class="container-cart-products">
+                    <!-- Aquí se mostrarán los productos del carrito dinámicamente -->
+                </div>
+            </div>
         </div>
     </header>
     <main>
+    <div class="container_items">
+        <div class="item">
+            <figure>
+                <img src="https://cdn.motor1.com/images/mgl/Qem2ZO/s1/volkswagen-golf-gti-2024.jpg" alt="Golf GTI 2024">
+            </figure>
+            <div class="info_product">
+                <h2>Golf GTI 2024</h2>
+                <p class="price">$32.500</p>
+                <button>Añadir al carrito</button>
+            </div>
+        </div>
+        <div class="item">
+            <figure>
+                <img src="https://images.prismic.io/carwow/Z4qh7JbqstJ99lZi_2024VWGolfRfrontquarterdriving.jpg" alt="Golf R 2024">
+            </figure>
+            <div class="info_product">
+                <h2>Golf R 2024</h2>
+                <p class="price">$38.000</p>
+                <button>Añadir al carrito</button>
+            </div>
+        </div>
+        <div class="item">
+            <figure>
+                <img src="https://hips.hearstapps.com/hmg-prod/images/vw-g60-limited-1-66f685b2b46b4.png?resize=980:*" alt="Golf G60 1989">
+            </figure>
+            <div class="info_product">
+                <h2>Golf G60 1989</h2>
+                <p class="price">$140.000</p>
+                <button>Añadir al carrito</button>
+            </div>
+        </div>
+        <div class="item">
+            <figure>
+                <img src="https://www.megautos.com/wp-content/uploads/2020/12/volkswagen-up-2021-xtreme-delantera.jpg" alt="Volkswagen Up 2021">
+            </figure>
+            <div class="info_product">
+                <h2>Up 2019</h2>
+                <p class="price">$15.000</p>
+                <button>Añadir al carrito</button>
+            </div>
+        </div>
+    </div>
 
     </main>
     <footer>
@@ -26,6 +99,6 @@
             <p>© 2025 Volkswagen. Todos los derechos reservados</p>
         </div>
     </footer>
-<script src="../assets/script.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

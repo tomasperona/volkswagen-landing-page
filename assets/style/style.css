@@ -418,10 +418,14 @@ footer p {
 }
 
 .icon-close {
+    stroke: #222;
     width: 22px;
     height: 22px;
-    stroke: #fff;
     transition: stroke 0.2s;
+}
+
+.btn-remove:hover .icon-close {
+    stroke: #ff3333;
 }
 
 .btn-remove:hover {
@@ -664,10 +668,14 @@ header{
 }
 
 .icon-close {
+    stroke: #222;
     width: 22px;
     height: 22px;
-    stroke: #fff;
     transition: stroke 0.2s;
+}
+
+.btn-remove:hover .icon-close {
+    stroke: #ff3333;
 }
 
 .btn-remove:hover {

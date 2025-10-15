@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
             containerCartProducts.classList.toggle("active");
         });
 
-        // Usa document.body para asegurar el cierre en todos los casos
+        // Usé document.body porque solo usando document. no me funcionaba bien en el index.
         document.body.addEventListener("click", function(event) {
-            // Si el clic NO fue dentro del carrito NI en el icono, cierra el carrito
+            // Si el clic no es dentro del carrito ni en el icono, cierra el carrito
             if (
                 !containerCartProducts.contains(event.target) &&
                 !btnCart.contains(event.target)
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // No mostrar nada si está vacío
             return;
         }
-        //cree un div por cada atributo de los productos.
+        //crea un div por cada producto
         carrito.forEach(producto => {
             const div = document.createElement("div");
             div.className = "cart-product";

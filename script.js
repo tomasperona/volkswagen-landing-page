@@ -124,11 +124,41 @@ document.addEventListener('DOMContentLoaded', function() {
         const productoEnCarrito = carrito.find(p => p.id === id);
         if (productoEnCarrito) {
             productoEnCarrito.cantidad += 1;
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: true,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "success",
+                title: "Producto Agregado"
+                });
         } else {
             carrito.push({
                 ...producto,
                 cantidad: 1
             });
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: true,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "success",
+                title: "Producto Agregado"
+              });
         }
         guardarCarrito(carrito);
         actualizarContador();

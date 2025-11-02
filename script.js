@@ -85,15 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
             div.className = "cart-product";
             div.innerHTML = `
                 <div class="info-cart-product">
-                    <span class="cantidad-producto-carrito">${producto.cantidad}</span>
                     <p class="titulo-producto-carrito">${producto.nombre}</p>
-                    <span class="precio-producto-carrito">$${producto.precio * producto.cantidad}</span>
+                    <span class="precio-producto-carrito">$${(producto.precio * producto.cantidad).toLocaleString()}</span>
                 </div>
-                <button class="btn-remove" data-id="${producto.id}" title="Quitar del carrito" style="background:none;border:none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-close" style="width:24px;height:24px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </button>
+
+                <div class="cart-controls-wrapper">
+                    <div class="cart-controls">
+                        <button class="qty_minus" data-id="${producto.id}" title="Restar">−</button>
+                        <input class="qty_input" data-id="${producto.id}" type="number" min="1" value="${producto.cantidad}">
+                        <button class="qty_plus" data-id="${producto.id}" title="Sumar">+</button>
+                    </div>
+
+                    <button class="btn-remove" data-id="${producto.id}" title="Quitar del carrito" aria-label="Quitar producto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon-close" style="width:20px;height:20px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6" />
+                        </svg>
+                    </button>
+                </div>
             `;
             containerCartProducts.appendChild(div);
         });
@@ -102,18 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const total = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
         const divTotal = document.createElement("div");
         divTotal.className = "cart-total";
-        divTotal.innerHTML = `<h3>Total:</h3><span class="total-pagar">$${total}</span>`;
+        divTotal.innerHTML = `<h3>Total:</h3><span class="total-pagar">$${total.toLocaleString()}</span>`;
         containerCartProducts.appendChild(divTotal);
-
-        // Evento para quitar productos
-        const removeBtns = containerCartProducts.querySelectorAll(".btn-remove");
-        removeBtns.forEach(btn => {
-            btn.addEventListener("click", function(e) {
-                e.stopPropagation();
-                const id = parseInt(btn.getAttribute("data-id"));
-                quitarDelCarrito(id);
-            });
-        });
     }
 
     // Añadir producto al carrito
@@ -124,45 +122,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const productoEnCarrito = carrito.find(p => p.id === id);
         if (productoEnCarrito) {
             productoEnCarrito.cantidad += 1;
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "bottom-end",
-                showConfirmButton: true,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "success",
-                title: "Producto Agregado"
-                });
         } else {
             carrito.push({
                 ...producto,
                 cantidad: 1
             });
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "bottom-end",
-                showConfirmButton: true,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "success",
-                title: "Producto Agregado"
-              });
         }
+
         guardarCarrito(carrito);
         actualizarContador();
         renderCarrito();
+        mostrarToast("Producto agregado");
     }
 
     // Quitar producto del carrito
@@ -176,6 +146,78 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Cambia cantidad (nuevo valor >=1). Si 0 o NaN -> elimina.
+    function cambiarCantidad(id, nuevaCantidad) {
+        const producto = carrito.find(p => p.id === id);
+        if (!producto) return;
+        const cantidad = parseInt(nuevaCantidad) || 0;
+        if (cantidad <= 0) {
+            quitarDelCarrito(id);
+        } else {
+            producto.cantidad = cantidad;
+            guardarCarrito(carrito);
+            actualizarContador();
+            renderCarrito();
+        }
+    }
+
+    // Delegación de eventos dentro del dropdown (plus, minus, input, remove)
+    if (containerCartProducts) {
+        containerCartProducts.addEventListener('click', function(e) {
+            const plus = e.target.closest('.qty_plus');
+            const minus = e.target.closest('.qty_minus');
+            const remove = e.target.closest('.btn-remove');
+
+            if (plus) {
+                const id = parseInt(plus.getAttribute('data-id'));
+                const prod = carrito.find(p => p.id === id);
+                if (prod) {
+                    prod.cantidad += 1;
+                    guardarCarrito(carrito);
+                    actualizarContador();
+                    renderCarrito();
+                }
+                e.stopPropagation();
+                return;
+            }
+
+            if (minus) {
+                const id = parseInt(minus.getAttribute('data-id'));
+                const prod = carrito.find(p => p.id === id);
+                if (prod) {
+                    prod.cantidad = prod.cantidad - 1;
+                    if (prod.cantidad <= 0) {
+                        quitarDelCarrito(id);
+                    } else {
+                        guardarCarrito(carrito);
+                        actualizarContador();
+                        renderCarrito();
+                    }
+                }
+                e.stopPropagation();
+                return;
+            }
+
+            if (remove) {
+                const id = parseInt(remove.getAttribute('data-id'));
+                quitarDelCarrito(id);
+                e.stopPropagation();
+                return;
+            }
+        });
+
+        // input change (typing new quantity)
+        containerCartProducts.addEventListener('input', function(e) {
+            const input = e.target;
+            if (input && input.classList.contains('qty_input')) {
+                const id = parseInt(input.getAttribute('data-id'));
+                const val = parseInt(input.value) || 0;
+                // no re-render on every keypress to keep UX snappy; wait short debounce
+                cambiarCantidad(id, val);
+            }
+        });
+    }
+
     // Si estamos en la tienda, conecta los botones "Añadir al carrito"
     const items = document.querySelectorAll(".item");
     if (items.length > 0) {
@@ -187,6 +229,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+    }
+
+    //sweet alert
+    function mostrarToast(title = "") {
+        if (typeof Swal !== "undefined") {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: true,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+            Toast.fire({ icon: "success", title });
+        }
     }
 
     // Inicializa el contador y el carrito al cargar
